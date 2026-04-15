@@ -73,6 +73,204 @@
       text-shadow: 0 0 1px rgba(0,0,0,0.3);
     }
 
+    /* Planning header: nav buttons + active underline (matches app/planning) */
+    .planning-nav-btn {
+      border-bottom: 2px solid transparent;
+      padding-bottom: 0.125rem;
+      background: none;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.8125rem; /* 13px; sm:text-sm in Tailwind on wrapper where used */
+      color: #ffffff;
+    }
+    @media (min-width: 640px) {
+      .planning-nav-btn {
+        font-size: 0.875rem; /* 14px */
+      }
+    }
+    .planning-nav-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 0.375rem;
+      color: #fff;
+    }
+    .planning-nav-btn.planning-nav-active {
+      border-bottom-color: #f0e6d4;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 0.375rem;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .planning-billing-label--active {
+      font-weight: 700;
+      color: #0c1e36;
+    }
+    .planning-billing-label:not(.planning-billing-label--active) {
+      font-weight: 500;
+      color: #3d4f63;
+    }
+    #planningBillingKnob {
+      transition: transform 0.2s ease;
+    }
+
+    /* Planning purchase flow (payment/invoice/history): mobile + 100-200% zoom safety */
+    #planningPaymentView {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 740px;
+      min-width: 0;
+    }
+    #planningInvoiceView {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 740px;
+      min-width: 0;
+    }
+    #planningHistoryView {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+    #planningPaymentView *,
+    #planningInvoiceView *,
+    #planningHistoryView * {
+      box-sizing: border-box;
+      min-width: 0;
+    }
+    /* Mobile/tablet safety at high zoom: always keep plan cards stacked */
+    @media (max-width: 1023px) {
+      .planning-plans-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+      .planning-billing-toggle-wrap {
+        gap: 0.45rem !important;
+      }
+      .planning-billing-toggle-wrap .planning-billing-label {
+        min-width: 0;
+        font-size: 12px !important;
+        line-height: 1.2;
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+    }
+    @media (max-width: 640px) {
+      #planningPaymentView { max-width: 100% !important; }
+      #planningInvoiceView { max-width: 100% !important; }
+      #planningHistoryView { max-width: 100% !important; }
+      #planningPaymentView,
+      #planningInvoiceView,
+      #planningHistoryView {
+        border-radius: 6px !important;
+      }
+      #planningPaymentView input,
+      #planningPaymentView select {
+        font-size: 12px !important;
+      }
+      #planningInvoiceView h2 {
+        font-size: 1.55rem !important;
+        line-height: 1.15 !important;
+      }
+      #planningInvoiceView > div {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+      #planningHistoryView h2 { font-size: 1.5rem !important; }
+      #planningHistoryView { padding: 0.75rem !important; }
+      #planningHistoryView .planning-history-track { max-width: 100% !important; }
+      #planningHistoryView .planning-history-table-wrap { max-width: 100% !important; }
+      #planningHistoryView table { min-width: 430px; font-size: 10px !important; }
+      #planningInvoiceView .planning-invoice-row {
+        grid-template-columns: 78px 10px minmax(0, 1fr) !important;
+      }
+      #planningInvoiceView .planning-invoice-value {
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
+      }
+      .planning-price-row {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 0.4rem !important;
+      }
+      .planning-price-oldsave {
+        width: 100%;
+        padding-right: 0 !important;
+      }
+      .planning-price-chip {
+        align-self: flex-end;
+        margin-right: 0 !important;
+        top: 0 !important;
+      }
+    }
+    @media (max-width: 420px) {
+      #planningPaymentView .grid.grid-cols-2 {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+      #planningInvoiceView .planning-invoice-row {
+        grid-template-columns: 78px 10px minmax(0, 1fr) !important;
+      }
+      .planning-billing-toggle-wrap {
+        justify-content: center !important;
+        gap: 0.5rem !important;
+      }
+      .planning-billing-toggle-wrap .planning-billing-label {
+        flex: 0 0 auto !important;
+        font-size: 11px !important;
+        line-height: 1.05 !important;
+        white-space: nowrap !important;
+        text-align: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .planning-billing-toggle-wrap .planning-billing-label:first-child,
+      .planning-billing-toggle-wrap .planning-billing-label:last-child {
+        max-width: 48px;
+        white-space: normal !important;
+      }
+      #planningHistoryView table {
+        min-width: 380px !important;
+      }
+    }
+
+    .planning-recommended-content-offset {
+      margin-top: 0;
+    }
+    /* Mobile + zoom safety: keep recommended badge clear of title */
+    @media (max-width: 768px) {
+      .planning-recommended-card {
+        padding-top: 2rem !important;
+      }
+      .planning-recommended-content-offset {
+        margin-top: 0.95rem !important;
+      }
+    }
+
+    /* Force square top header edges across laptop/browser differences */
+    .planning-top-nav,
+    .planning-top-nav-inner {
+      border-radius: 0 !important;
+    }
+
+    /* Desktop zoom fallback (roughly 150-200%): show hamburger + compact menu for planning header */
+    @media (hover: hover) and (pointer: fine) and (max-width: 1400px) and (min-resolution: 1.25dppx) {
+      .planning-zoom-show-hamburger {
+        display: inline-flex !important;
+      }
+      .planning-zoom-hide-primary-nav {
+        display: none !important;
+      }
+      .planning-zoom-show-mobile-menu:not(.hidden) {
+        display: block !important;
+      }
+      /* Prevent badge/title overlap on recommended card at desktop 150-200% zoom */
+      .planning-recommended-card {
+        padding-top: 1.85rem !important;
+      }
+      .planning-recommended-content-offset {
+        margin-top: 0.85rem !important;
+      }
+    }
+
     @media (max-width: 400px) {
       .font-welcome-heading {
         text-align: center;
@@ -270,7 +468,7 @@
         font-size: 10px;
         letter-spacing: -0.03em;
       }
-      .font-welcome-heading {
+     .font-welcome-heading {
         letter-spacing: 0.22em;
         white-space: nowrap;
       }
@@ -384,8 +582,7 @@
 
     /* Mobile: no extra top/bottom bands; safe-area lives inside card */
     @media (max-width: 1023px) {
-      html,
-      body {
+      body.auth-visible {
         margin: 0 !important;
         padding: 0 !important;
         width: 100% !important;
@@ -489,9 +686,8 @@
      * width breakpoints and reintroduce white bands. Force edge-to-edge auth layout on
      * touch-first devices regardless of reported width.
      */
-    @media (hover: none) and (pointer: coarse) {
-      html,
-      body {
+    @media (hover: none) and (pointer: coarse) and (max-width: 1023px) {
+      body.auth-visible {
         margin: 0 !important;
         padding: 0 !important;
         width: 100% !important;
@@ -779,7 +975,461 @@
 <body class="bg-white antialiased">
 
   <script>
-    const BACKEND_BASE_URL = "http://localhost:5000";
+    const BACKEND_BASE_URL = "http://52.14.128.127:5000";
+
+    /** Shown until auth API provides the real name; optional override: localStorage.stacklyDisplayName */
+    var PLANNING_DISPLAY_USER_NAME = "Pentakota Srinivas";
+
+    function initPlanningHeader() {
+      var sw = document.getElementById("planningBillingSwitch");
+      if (sw) {
+        planningApplyPlanPrices(sw.getAttribute("aria-checked") === "true");
+      }
+      var el = document.getElementById("planningDisplayUserName");
+      if (el) {
+        try {
+          var name = localStorage.getItem("stacklyDisplayName");
+          el.textContent = name && String(name).trim() ? String(name).trim() : PLANNING_DISPLAY_USER_NAME;
+        } catch (e) {
+          el.textContent = PLANNING_DISPLAY_USER_NAME;
+        }
+      }
+      setPlanningNavActive("billing");
+      planningSetView("plans");
+      planningRenderHistory();
+    }
+
+    function setPlanningNavActive(navId) {
+      ["workspace", "myWebsites", "templates", "domains", "billing"].forEach(function (id) {
+        var btn = document.getElementById("planningNav-" + id);
+        var mobileBtn = document.getElementById("planningMobile-" + id);
+        if (!btn) return;
+        if (id === navId) {
+          btn.classList.add("planning-nav-active");
+          btn.setAttribute("aria-current", "page");
+          if (mobileBtn) {
+            mobileBtn.classList.add("border-[#f0e6d4]", "bg-white/10", "text-white");
+            mobileBtn.classList.remove("border-white/25");
+          }
+        } else {
+          btn.classList.remove("planning-nav-active");
+          btn.removeAttribute("aria-current");
+          if (mobileBtn) {
+            mobileBtn.classList.remove("border-[#f0e6d4]", "bg-white/10", "text-white");
+            mobileBtn.classList.add("border-white/25", "text-white");
+          }
+        }
+      });
+    }
+
+    function planningNavClick(navId) {
+      setPlanningNavActive(navId);
+      var mobileMenu = document.getElementById("planningMobileMenu");
+      var mobileBtn = document.getElementById("planningMobileMenuBtn");
+      if (mobileMenu) mobileMenu.classList.add("hidden");
+      if (mobileBtn) mobileBtn.setAttribute("aria-expanded", "false");
+      if (navId === "billing") {
+        var target = document.getElementById("planningBillingContent");
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      window.setTimeout(function () {
+        location.hash = "notFound";
+        showPage("notFound");
+      }, 140);
+    }
+
+    function togglePlanningMobileMenu(event) {
+      if (event) event.stopPropagation();
+      var menu = document.getElementById("planningMobileMenu");
+      var btn = document.getElementById("planningMobileMenuBtn");
+      if (!menu || !btn) return;
+      menu.classList.toggle("hidden");
+      var isOpen = !menu.classList.contains("hidden");
+      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+
+    function togglePlanningProfileMenu(event) {
+      if (event) event.stopPropagation();
+      var menu = document.getElementById("planningProfileMenu");
+      var btn = document.getElementById("planningProfileToggle");
+      if (!menu || !btn) return;
+      menu.classList.toggle("hidden");
+      var isOpen = !menu.classList.contains("hidden");
+      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+
+    document.addEventListener("click", function (e) {
+      var wrap = document.getElementById("planningProfileWrap");
+      var menu = document.getElementById("planningProfileMenu");
+      if (!wrap || !menu || menu.classList.contains("hidden")) return;
+      if (!wrap.contains(e.target)) {
+        menu.classList.add("hidden");
+        var btn = document.getElementById("planningProfileToggle");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("click", function (e) {
+      var mobileWrap = document.getElementById("planningMobileWrap");
+      var mobileMenu = document.getElementById("planningMobileMenu");
+      if (!mobileWrap || !mobileMenu || mobileMenu.classList.contains("hidden")) return;
+      if (!mobileWrap.contains(e.target)) {
+        mobileMenu.classList.add("hidden");
+        var mobileBtn = document.getElementById("planningMobileMenuBtn");
+        if (mobileBtn) mobileBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    /** Monthly / yearly totals for plan cards (must match app/planning/page.tsx) */
+    var PLANNING_PLAN_PRICES = {
+      monthly: [
+        { period: "Per month", old: "$80", save: "Save 50%", new: "$40" },
+        { period: "Per month", old: "$300", save: "Save 50%", new: "$150" },
+        { period: "Per month", old: "$400", save: "Save 30%", new: "$280" }
+      ],
+      yearly: [
+        { period: "Per year", old: "$960", save: "Save 58%", new: "$403" },
+        { period: "Per year", old: "$3,600", save: "Save 58%", new: "$1,512" },
+        { period: "Per year", old: "$4,800", save: "Save 30%", new: "$3,360" }
+      ]
+    };
+
+    var planningView = "plans";
+    var planningSelectedPlanIndex = 0;
+    var planningIsFreeCheckout = false;
+    var planningHistoryFilterYear = "this";
+    var planningInvoiceData = null;
+
+    var PLANNING_BILLING_HISTORY_KEY = "stacklyPlanningBillingHistory";
+
+    function planningDefaultHistoryRows() {
+      return [
+        { date: "Apr 02 2026", invoiceId: "INV-200987", amount: "$39.00", status: "Paid" },
+        { date: "Mar 15 2026", invoiceId: "INV-121289", amount: "$39.00", status: "Paid" },
+        { date: "Feb 08 2026", invoiceId: "INV-100123", amount: "$39.00", status: "Paid" },
+        { date: "Jan 20 2026", invoiceId: "INV-100154", amount: "$39.00", status: "Paid" },
+        { date: "Dec 20 2025", invoiceId: "INV-101164", amount: "$39.00", status: "Paid" },
+        { date: "Dec 10 2025", invoiceId: "INV-100140", amount: "$0.00", status: "Free" },
+        { date: "Nov 20 2025", invoiceId: "INV-100100", amount: "$0.00", status: "Free" },
+        { date: "Oct 08 2025", invoiceId: "INV-100240", amount: "$0.00", status: "Free" }
+      ];
+    }
+
+    function planningLoadHistoryFromStorage() {
+      try {
+        var raw = localStorage.getItem(PLANNING_BILLING_HISTORY_KEY);
+        if (!raw) return null;
+        var parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed) || parsed.length === 0) return null;
+        var rows = parsed.filter(function (e) {
+          return e && typeof e.date === "string" && typeof e.invoiceId === "string" && typeof e.amount === "string" && (e.status === "Paid" || e.status === "Free");
+        });
+        return rows.length ? rows : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function planningSaveHistoryToStorage() {
+      try {
+        localStorage.setItem(PLANNING_BILLING_HISTORY_KEY, JSON.stringify(planningHistory));
+      } catch (e) {}
+    }
+
+    var planningHistory = planningLoadHistoryFromStorage() || planningDefaultHistoryRows();
+
+    function planningHistoryYearFromDate(dateText) {
+      var m = String(dateText || "").match(/(\d{4})$/);
+      return m ? Number(m[1]) : NaN;
+    }
+
+    function planningGetHistoryYears() {
+      var seen = {};
+      var years = [];
+      [new Date().getFullYear(), 2026, 2025, 2024, 2023, 2022, 2021].forEach(function (y) {
+        if (!seen[y]) {
+          seen[y] = true;
+          years.push(y);
+        }
+      });
+      planningHistory.forEach(function (entry) {
+        var y = planningHistoryYearFromDate(entry.date);
+        if (!Number.isFinite(y) || seen[y]) return;
+        seen[y] = true;
+        years.push(y);
+      });
+      years.sort(function (a, b) { return b - a; });
+      return years;
+    }
+
+    function planningGetActiveHistoryYear() {
+      return planningHistoryFilterYear === "this" ? new Date().getFullYear() : Number(planningHistoryFilterYear);
+    }
+
+    function planningSetHistoryFilterYear(value) {
+      planningHistoryFilterYear = value || "this";
+      planningRenderHistory();
+      planningSyncHistoryYearSelect();
+    }
+
+    function planningSyncHistoryYearSelect() {
+      var sel = document.getElementById("planningHistoryYearSelect");
+      if (!sel) return;
+      var years = planningGetHistoryYears();
+      var opts = "<option value='this'>This Year</option>";
+      years.forEach(function (y) {
+        opts += "<option value='" + y + "'>" + y + "</option>";
+      });
+      sel.innerHTML = opts;
+      sel.value = planningHistoryFilterYear;
+      sel.style.fontWeight = planningHistoryFilterYear === "all" ? "500" : "700";
+      var allBtn = document.getElementById("planningHistoryAllBtn");
+      if (allBtn) {
+        allBtn.style.background = planningHistoryFilterYear === "all" ? "#eef2ff" : "transparent";
+        allBtn.style.fontWeight = planningHistoryFilterYear === "all" ? "700" : "500";
+      }
+    }
+
+    function planningBackToPlans() {
+      planningSetView("plans");
+    }
+
+    function planningSetView(view) {
+      planningView = view;
+      var ids = ["planningPlansView", "planningPaymentView", "planningInvoiceView", "planningHistoryView"];
+      ids.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        if ((view === "plans" && id === "planningPlansView") ||
+            (view === "payment" && id === "planningPaymentView") ||
+            (view === "invoice" && id === "planningInvoiceView") ||
+            (view === "history" && id === "planningHistoryView")) {
+          el.classList.remove("hidden");
+        } else {
+          el.classList.add("hidden");
+        }
+      });
+    }
+
+    function planningGetActivePrice(index) {
+      var sw = document.getElementById("planningBillingSwitch");
+      var yearly = sw && sw.getAttribute("aria-checked") === "true";
+      var row = (yearly ? PLANNING_PLAN_PRICES.yearly : PLANNING_PLAN_PRICES.monthly)[index] || PLANNING_PLAN_PRICES.monthly[0];
+      return { amount: row.new, period: yearly ? "Yearly" : "Monthly" };
+    }
+
+    function planningCardNumberInput(el) {
+      el.value = el.value.replace(/\D/g, "").slice(0, 19);
+    }
+
+    function planningCardExpiryInput(el) {
+      var d = el.value.replace(/\D/g, "").slice(0, 4);
+      el.value = d.length <= 2 ? d : d.slice(0, 2) + "/" + d.slice(2);
+    }
+
+    function planningCardCvvInput(el) {
+      el.value = el.value.replace(/\D/g, "").slice(0, 4);
+    }
+
+    function planningPaymentSubtitleFor(method) {
+      var map = {
+        paypal: "Sign in with PayPal to complete your upgrade.",
+        card: "Enter your card details to upgrade.",
+        netbanking: "Choose your bank and authorize payment.",
+        online: "Pay with UPI — open your app or enter your UPI ID."
+      };
+      return map[method] || "Enter your payment details to Upgrade";
+    }
+
+    function planningGetPaymentMethod() {
+      var r = document.querySelector('input[name="planningPm"]:checked');
+      return r && r.value ? r.value : "card";
+    }
+
+    function planningSyncOnlinePaymentHint() {
+      var hint = document.getElementById("planningOnlinePaymentHint");
+      if (!hint) return;
+      var w = document.querySelector('input[name="planningOnlineWallet"]:checked');
+      var which = w && w.value === "phonepe" ? "phonepe" : "gpay";
+      hint.textContent =
+        which === "gpay"
+          ? "Open Google Pay and approve the request, or pay with your UPI ID above."
+          : "Open PhonePe and approve the request, or pay with your UPI ID above.";
+    }
+
+    function planningSyncPaymentMethodUI() {
+      var method = planningGetPaymentMethod();
+      var sub = document.getElementById("planningPaymentSubtitle");
+      if (sub) sub.textContent = planningPaymentSubtitleFor(method);
+      var panels = {
+        paypal: "planningPaymentPanelPaypal",
+        card: "planningPaymentPanelCard",
+        netbanking: "planningPaymentPanelNetbanking",
+        online: "planningPaymentPanelOnline"
+      };
+      Object.keys(panels).forEach(function (k) {
+        var el = document.getElementById(panels[k]);
+        if (!el) return;
+        if (k === method) el.classList.remove("hidden");
+        else el.classList.add("hidden");
+      });
+      planningSyncOnlinePaymentHint();
+    }
+
+    function planningResetPaymentForm() {
+      var cardRadio = document.querySelector('input[name="planningPm"][value="card"]');
+      if (cardRadio) cardRadio.checked = true;
+      var paypalEmail = document.getElementById("planningPaypalEmail");
+      if (paypalEmail) paypalEmail.value = "";
+      var cn = document.getElementById("planningCardNumber");
+      var ce = document.getElementById("planningCardExpiry");
+      var cv = document.getElementById("planningCardCvv");
+      if (cn) cn.value = "";
+      if (ce) ce.value = "";
+      if (cv) cv.value = "";
+      var nb = document.getElementById("planningNetBank");
+      if (nb) nb.value = "";
+      var upi = document.getElementById("planningUpiId");
+      if (upi) upi.value = "";
+      var gpay = document.querySelector('input[name="planningOnlineWallet"][value="gpay"]');
+      if (gpay) gpay.checked = true;
+      planningSyncPaymentMethodUI();
+    }
+
+    function planningOpenPayment(planIndex, freeCheckout) {
+      planningSelectedPlanIndex = planIndex || 0;
+      planningIsFreeCheckout = !!freeCheckout;
+      planningResetPaymentForm();
+      planningSetView("payment");
+    }
+
+    function planningCompletePayment() {
+      var btn = document.getElementById("planningCompletePaymentBtn");
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Processing payment...";
+      }
+      window.setTimeout(function () {
+        var p = planningGetActivePrice(planningSelectedPlanIndex);
+        var names = ["Basic", "Business Plan", "Advanced"];
+        var now = new Date();
+        var invoiceId = "INV-" + Math.floor(100000 + Math.random() * 899999);
+        var finalAmount = planningIsFreeCheckout ? "$0" : p.amount;
+        planningInvoiceData = {
+          invoiceId: invoiceId,
+          date: now.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" }),
+          planName: names[planningSelectedPlanIndex] + " (" + (planningIsFreeCheckout ? "Free" : p.period) + ")",
+          amount: finalAmount,
+          name: PLANNING_DISPLAY_USER_NAME,
+          email: "srinu@gmail.com",
+          contactNo: "9848xxxx19",
+          address: "Chennai - 636008"
+        };
+        var newRow = {
+          date: planningInvoiceData.date,
+          invoiceId: planningInvoiceData.invoiceId,
+          amount: planningInvoiceData.amount,
+          status: planningIsFreeCheckout ? "Free" : "Paid"
+        };
+        planningHistory = [newRow].concat(
+          planningHistory.filter(function (e) {
+            return e.invoiceId !== newRow.invoiceId;
+          })
+        );
+        planningSaveHistoryToStorage();
+        planningRenderInvoice();
+        planningRenderHistory();
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "Complete Payment";
+        }
+        planningIsFreeCheckout = false;
+        planningSetView("invoice");
+      }, 2400);
+    }
+
+    function planningRenderInvoice() {
+      if (!planningInvoiceData) return;
+      var map = {
+        planningInvoiceId: planningInvoiceData.invoiceId,
+        planningInvoiceDate: planningInvoiceData.date,
+        planningInvoicePlan: planningInvoiceData.planName,
+        planningInvoiceAmount: planningInvoiceData.amount,
+        planningInvoiceName: planningInvoiceData.name,
+        planningInvoiceEmail: planningInvoiceData.email,
+        planningInvoiceContact: planningInvoiceData.contactNo,
+        planningInvoiceAddress: planningInvoiceData.address
+      };
+      Object.keys(map).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = map[id];
+      });
+    }
+
+    function planningRenderHistory() {
+      var tbody = document.getElementById("planningHistoryTbody");
+      if (!tbody) return;
+      var rows = planningHistoryFilterYear === "all"
+        ? planningHistory
+        : planningHistory.filter(function (entry) {
+            return planningHistoryYearFromDate(entry.date) === planningGetActiveHistoryYear();
+          });
+      tbody.innerHTML = rows.map(function (entry) {
+        var badge = entry.status === "Paid" ? "#4f8f43" : "#667085";
+        return "<tr style='border-top:1px solid #e2e8f0'>"
+          + "<td class='px-3 py-3.5'>" + entry.date + "</td>"
+          + "<td class='px-3 py-3.5'>" + entry.invoiceId + "</td>"
+          + "<td class='px-3 py-3.5'>" + entry.amount + "</td>"
+          + "<td class='px-3 py-3.5'><span class='inline-flex min-w-[56px] justify-center rounded-md px-2 py-1 text-[10px] font-bold text-white' style='background:" + badge + "'>" + entry.status + "</span></td>"
+          + "<td class='px-3 py-3.5'><span class='inline-flex h-6 w-7 items-center justify-center rounded-md text-xs font-bold text-white' style='background:#1e7fd8'>↓</span></td>"
+          + "</tr>";
+      }).join("");
+      planningSyncHistoryYearSelect();
+    }
+
+    function planningApplyPlanPrices(yearly) {
+      var tier = yearly ? "yearly" : "monthly";
+      var rows = PLANNING_PLAN_PRICES[tier];
+      var ids = [
+        { period: "planningPriceBasicPeriod", old: "planningPriceBasicOld", save: "planningPriceBasicSave", chip: "planningPriceBasicNew" },
+        { period: "planningPriceBusinessPeriod", old: "planningPriceBusinessOld", save: "planningPriceBusinessSave", chip: "planningPriceBusinessNew" },
+        { period: "planningPriceAdvancedPeriod", old: "planningPriceAdvancedOld", save: "planningPriceAdvancedSave", chip: "planningPriceAdvancedNew" }
+      ];
+      for (var i = 0; i < 3; i++) {
+        var p = rows[i];
+        var el = ids[i];
+        var nodePeriod = document.getElementById(el.period);
+        var nodeOld = document.getElementById(el.old);
+        var nodeSave = document.getElementById(el.save);
+        var nodeNew = document.getElementById(el.chip);
+        if (nodePeriod) nodePeriod.textContent = p.period;
+        if (nodeOld) nodeOld.textContent = p.old;
+        if (nodeSave) nodeSave.textContent = p.save;
+        if (nodeNew) nodeNew.textContent = p.new;
+      }
+    }
+
+    function planningSetBilling(yearly) {
+      var sw = document.getElementById("planningBillingSwitch");
+      var knob = document.getElementById("planningBillingKnob");
+      var lm = document.getElementById("planningLabelMonthly");
+      var ly = document.getElementById("planningLabelYearly");
+      if (!sw || !knob || !lm || !ly) return;
+      sw.setAttribute("aria-checked", yearly ? "true" : "false");
+      knob.classList.toggle("translate-x-0", !yearly);
+      knob.classList.toggle("translate-x-6", yearly);
+      lm.classList.toggle("planning-billing-label--active", !yearly);
+      ly.classList.toggle("planning-billing-label--active", yearly);
+      planningApplyPlanPrices(yearly);
+    }
+
+    function planningToggleBilling() {
+      var sw = document.getElementById("planningBillingSwitch");
+      if (!sw) return;
+      var yearly = sw.getAttribute("aria-checked") === "true";
+      planningSetBilling(!yearly);
+    }
 
     function updateMobilePlaceholders() {
       var loginEmail = document.getElementById("loginEmail");
@@ -790,7 +1440,7 @@
     }
 
     function showPage(page) {
-      var pages = ["planning", "signup", "login", "error", "forgot", "verifyEmail", "verifyMobile", "verified", "createNewPassword"];
+      var pages = ["planning", "signup", "login", "error", "notFound", "forgot", "verifyEmail", "verifyMobile", "verified", "createNewPassword"];
       pages.forEach(function (key) {
         var el = document.getElementById(key + "Page");
         if (el) el.classList.add("hidden");
@@ -798,9 +1448,11 @@
       var active = document.getElementById(page + "Page");
       if (active) active.classList.remove("hidden");
       var isAuth = (page === "login" || page === "signup");
+      document.body.classList.toggle("auth-visible", isAuth);
       // Keep page scroll available on desktop zoom (150-200%) to avoid clipped auth content.
       document.body.style.overflow = "";
       updateMobilePlaceholders();
+      if (page === "planning") initPlanningHeader();
     }
 
     function setupAuthPullToRefresh() {
@@ -935,8 +1587,7 @@
       if (!valid) return;
 
       try {
-        const body = { name: name, email: email.toLowerCase(), password: password };
-        if (mobile) body.mobileNumber = mobile;
+        const body = { name: name, email: email.toLowerCase(), mobile:mobile, password: password, confirmPassword:confirmPassword };
         const res = await fetch(BACKEND_BASE_URL + "/api/auth/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -954,51 +1605,69 @@
       }
     }
 
-    async function handleLogin() {
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value;
+     
 
-      const emailError = document.getElementById("loginEmailError");
-      const passwordError = document.getElementById("loginPasswordError");
-      const formError = document.getElementById("loginFormError");
+     async function handleLogin() {
+     const email = document.getElementById("loginEmail").value.trim();
+     const password = document.getElementById("loginPassword").value;
 
-      emailError.innerText = "";
-      passwordError.innerText = "";
-      if (formError) formError.innerText = "";
+     const emailError = document.getElementById("loginEmailError");
+     const passwordError = document.getElementById("loginPasswordError");
+     const formError = document.getElementById("loginFormError");
 
-      let valid = true;
-      var isEmail = validateEmail(email);
-      var isMobileLogin = isMobile(email);
-      if (!isEmail && !isMobileLogin) {
-        emailError.innerText = "Enter valid email or mobile number";
-        valid = false;
-      }
-      if (!password || password.length < 8) {
-        passwordError.innerText = "Enter valid password";
-        valid = false;
-      }
-      if (!valid) return;
+     emailError.innerText = "";
+     passwordError.innerText = "";
+     if (formError) formError.innerText = "";
 
-      try {
-        const res = await fetch(BACKEND_BASE_URL + "/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: email.toLowerCase(),
-            password: password,
-          }),
-        });
-        const data = await res.json().catch(function () { return {}; });
-        if (!res.ok) {
-        if (formError) formError.innerText = data.message || "Login failed. Please try again";
-        return;
-        }
-        alert("Login successful!");
-      } catch (e) {
-        history.pushState(null, "", "#error");
-        showPage("error");
-      }
+     let valid = true;
+     var isEmail = validateEmail(email);
+     var isMobileLogin = isMobile(email);
+
+     if (!isEmail && !isMobileLogin) {
+     emailError.innerText = "Enter valid email or mobile number";
+     valid = false;
+  }
+
+     if (!password || password.length < 8) {
+     passwordError.innerText = "Enter valid password";
+     valid = false;
+  }
+
+     if (!valid) return;
+
+     try {
+     // ✅ CHANGE STARTS HERE
+     let body = {
+      password: password
+    };
+
+    if (isEmail) {
+      body.email = email.toLowerCase();
+    } else {
+      body.mobile = email;
     }
+    // ✅ CHANGE ENDS HERE
+
+    const res = await fetch(BACKEND_BASE_URL + "/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json().catch(function () { return {}; });
+
+    if (!res.ok) {
+      if (formError) formError.innerText = data.message || "Login failed. Please try again";
+      return;
+    }
+
+    alert("Login successful!");
+  } catch (e) {
+    history.pushState(null, "", "#error");
+    showPage("error");
+  }
+}
+      
 
     async function handleForgotPassword() {
       var emailEl = document.getElementById("forgotEmail");
@@ -1058,8 +1727,10 @@
       else if (hash === "verified") showPage("verified");
       else if (hash === "createNewPassword") showPage("createNewPassword");
       else if (hash === "error") showPage("error");
+      else if (hash === "notFound") showPage("notFound");
       else showPage("login");
       setupAuthPullToRefresh();
+      updateVerifyOtpButtons();
     });
 
     window.addEventListener("hashchange", function () {
@@ -1072,6 +1743,7 @@
       else if (hash === "verified") showPage("verified");
       else if (hash === "createNewPassword") showPage("createNewPassword");
       else if (hash === "error") showPage("error");
+      else if (hash === "notFound") showPage("notFound");
       else showPage("login");
     });
 
@@ -1085,6 +1757,7 @@
       else if (hash === "verified") showPage("verified");
       else if (hash === "createNewPassword") showPage("createNewPassword");
       else if (hash === "error") showPage("error");
+      else if (hash === "notFound") showPage("notFound");
       else showPage("login");
     });
 
@@ -1149,6 +1822,30 @@
       if (/[a-zA-Z0-9]/.test(input.value)) wrap.classList.remove("password-toggle-hidden"); else wrap.classList.add("password-toggle-hidden");
     }
 
+    function updateVerifyOtpButtons() {
+      var emailComplete = true;
+      for (var i = 0; i < 4; i++) {
+        var inp = document.getElementById("emailOtp" + i);
+        if (!inp || !inp.value.trim()) {
+          emailComplete = false;
+          break;
+        }
+      }
+      var emailBtn = document.getElementById("verifyEmailConfirmBtn");
+      if (emailBtn) emailBtn.disabled = !emailComplete;
+
+      var mobileComplete = true;
+      for (var j = 0; j < 4; j++) {
+        var minp = document.getElementById("mobileOtp" + j);
+        if (!minp || !minp.value.trim()) {
+          mobileComplete = false;
+          break;
+        }
+      }
+      var mobileBtn = document.getElementById("verifyMobileConfirmBtn");
+      if (mobileBtn) mobileBtn.disabled = !mobileComplete;
+    }
+
     function handleOtpInput(group, index, event) {
       var input = event.target;
       input.value = input.value.replace(/[^0-9]/g, "").slice(0, 1);
@@ -1156,6 +1853,7 @@
         var next = document.getElementById(group + "Otp" + (index + 1));
         if (next) next.focus();
       }
+      updateVerifyOtpButtons();
     }
 
     function resendCode(type) {
@@ -1169,8 +1867,8 @@
       }
     }
 
-    function confirmEmailOtp() {
-      event.preventDefault();
+    function confirmEmailOtp(event) {
+      if (event && event.preventDefault) event.preventDefault();
       var errEl = document.getElementById("verifyEmailOtpError");
       var btn = document.getElementById("verifyEmailConfirmBtn");
       if (errEl) errEl.innerText = "";
@@ -1213,8 +1911,8 @@
       });
     }
 
-    function confirmMobileOtp() {
-      event.preventDefault();
+    function confirmMobileOtp(event) {
+      if (event && event.preventDefault) event.preventDefault();
       var errEl = document.getElementById("verifyMobileOtpError");
       var btn = document.getElementById("verifyMobileConfirmBtn");
       if (errEl) errEl.innerText = "";
@@ -1311,158 +2009,411 @@
   </script>
 
   <!-- ================= PLANNING PAGE ================= -->
-  <div id="planningPage" class="hidden min-h-screen bg-[#efefef] px-2 py-2 sm:px-4 sm:py-4">
-    <nav class="w-full bg-[#06224C]">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-3 py-2 sm:px-6">
-        <div class="flex items-center gap-6">
-          <div class="flex h-7 w-[78px] items-center justify-center overflow-hidden rounded-[999px] bg-white sm:h-8 sm:w-[92px]">
-            <img src="./public/stackly-logo.webp" alt="Stackly logo" class="h-[16px] w-auto sm:h-[18px]" />
+  <div id="planningPage" class="hidden min-h-[100dvh] w-full bg-[#efefef] overflow-x-hidden">
+    <nav class="planning-top-nav w-full bg-[#06224C]">
+      <div class="planning-top-nav-inner flex w-full flex-wrap items-center gap-2 px-3 py-3 sm:gap-3 sm:px-8 xl:flex-nowrap">
+        <div class="flex min-w-0 flex-shrink-0 items-center gap-2">
+          <button
+            type="button"
+            id="planningMobileMenuBtn"
+            onclick="togglePlanningMobileMenu(event)"
+            class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/25 text-white md:hidden planning-zoom-show-hamburger"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+          >
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 5.5H17M3 10H17M3 14.5H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </button>
+
+          <div class="flex h-8 min-w-[92px] items-center justify-center overflow-hidden rounded-[50%] bg-white px-3 sm:h-9 sm:min-w-[104px]">
+            <img src="./public/stackly-logo.webp" alt="Stackly logo" class="h-[18px] w-auto sm:h-[20px]" />
+          </div>
       </div>
 
-          <nav class="hidden items-center gap-8 text-[11px] text-white/90 md:flex">
-            <span>Workspace</span>
-            <span>My Websites</span>
-            <span>Templates</span>
-            <span>Domains</span>
-            <span>Billing</span>
+        <div class="hidden min-w-0 flex-1 md:flex md:items-center planning-zoom-hide-primary-nav">
+          <nav class="flex w-full min-w-0 flex-wrap items-center justify-evenly gap-x-2 gap-y-2 text-[13px] text-white sm:text-sm sm:gap-x-3" aria-label="Main">
+            <button type="button" id="planningNav-workspace" class="planning-nav-btn shrink-0" onclick="planningNavClick('workspace')">Workspace</button>
+            <button type="button" id="planningNav-myWebsites" class="planning-nav-btn shrink-0" onclick="planningNavClick('myWebsites')">My Websites</button>
+            <button type="button" id="planningNav-templates" class="planning-nav-btn shrink-0" onclick="planningNavClick('templates')">Templates</button>
+            <button type="button" id="planningNav-domains" class="planning-nav-btn shrink-0" onclick="planningNavClick('domains')">Domains</button>
+            <button type="button" id="planningNav-billing" class="planning-nav-btn planning-nav-active shrink-0" aria-current="page" onclick="planningNavClick('billing')">Billing</button>
           </nav>
         </div>
 
-        <div class="flex items-center gap-3">
-          <div class="hidden items-center gap-2 lg:flex">
-              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-white">
-                <img src="./public/logoplan.png" alt="Logo 1" class="h-4 w-4 object-contain" />
-              </span>
-              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-white">
-                <img src="./public/logoplan2.png" alt="Logo 2" class="h-4 w-4 object-contain" />
-              </span>
-              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-white">
-                <img src="./public/logoplan3.png" alt="Logo 3" class="h-4 w-4 object-contain" />
-              </span>
+        <div id="planningMobileWrap" class="ml-auto flex min-w-0 flex-nowrap items-center gap-4 sm:gap-5 lg:gap-6">
+          <div class="flex shrink-0 items-center gap-3 md:hidden">
+            <button type="button" class="flex h-8 w-8 touch-manipulation items-center justify-center rounded-full border border-transparent bg-white p-0 m-0 cursor-pointer shadow-sm transition-all duration-150 ease-out hover:border-white/50 hover:bg-slate-100 hover:shadow-md hover:shadow-black/20 hover:ring-2 hover:ring-white/60 active:scale-[0.96] active:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#06224C]" aria-label="Help">
+              <svg class="pointer-events-none h-[17px] w-[17px] shrink-0 text-[#06224C]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" shape-rendering="geometricPrecision">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+                <path d="M9.75 9.5a2.25 2.25 0 1 1 3.9 1.55c-.55.57-1.15 1-1.65 1.6-.27.33-.42.7-.42 1.1v.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="12" cy="16.8" r="1" fill="currentColor" />
+              </svg>
+            </button>
+            <button type="button" class="flex h-8 w-8 touch-manipulation items-center justify-center rounded-full border border-transparent bg-white p-0 m-0 cursor-pointer shadow-sm transition-all duration-150 ease-out hover:border-white/50 hover:bg-slate-100 hover:shadow-md hover:shadow-black/20 hover:ring-2 hover:ring-white/60 active:scale-[0.96] active:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#06224C]" aria-label="Settings">
+              <svg class="pointer-events-none h-[17px] w-[17px] shrink-0 text-[#06224C]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" shape-rendering="geometricPrecision">
+                <path d="M12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" stroke="currentColor" stroke-width="2" />
+                <path d="M19 12a7.1 7.1 0 0 0-.07-.95l2.02-1.57-2-3.46-2.48.81a7.5 7.5 0 0 0-1.65-.96L14.4 3h-4.8l-.42 2.87c-.59.23-1.14.55-1.65.96l-2.48-.81-2 3.46 2.02 1.57a7.9 7.9 0 0 0 0 1.9L3.05 14.52l2 3.46 2.48-.81c.5.41 1.06.73 1.65.96L9.6 21h4.8l.42-2.87c.59-.23 1.14-.55 1.65-.96l2.48.81 2-3.46-2.02-1.57c.05-.31.07-.63.07-.95Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".9" />
+              </svg>
+            </button>
+            <button type="button" class="flex h-8 w-8 touch-manipulation items-center justify-center rounded-full border border-transparent bg-white p-0 m-0 cursor-pointer shadow-sm transition-all duration-150 ease-out hover:border-white/50 hover:bg-slate-100 hover:shadow-md hover:shadow-black/20 hover:ring-2 hover:ring-white/60 active:scale-[0.96] active:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#06224C]" aria-label="Notifications">
+              <svg class="pointer-events-none h-[18px] w-[18px] shrink-0 text-[#06224C]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" shape-rendering="geometricPrecision">
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
           </div>
 
-          <div class="hidden items-center gap-2 lg:flex">
-            <img src="./public/photo.png" alt="Profile" class="h-7 w-7 rounded-full object-cover" />
-            <span class="text-[11px] text-white/80 whitespace-nowrap">Srinivas Penakota</span>
-            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <path d="M3.5 5L6 7.5L8.5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" />
-            </svg>
+          <div class="hidden items-center gap-5 md:flex lg:gap-6">
+            <button type="button" class="flex h-6 w-6 items-center justify-center rounded-full border border-transparent bg-white p-0 m-0 cursor-pointer shadow-sm transition-all duration-150 ease-out hover:border-white/50 hover:bg-slate-100 hover:shadow-md hover:shadow-black/20 hover:ring-2 hover:ring-white/60 active:scale-[0.96] active:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#06224C]" aria-label="Help">
+              <svg class="pointer-events-none h-4 w-4 shrink-0 text-[#06224C]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" shape-rendering="geometricPrecision">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+                <path d="M9.75 9.5a2.25 2.25 0 1 1 3.9 1.55c-.55.57-1.15 1-1.65 1.6-.27.33-.42.7-.42 1.1v.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="12" cy="16.8" r="1" fill="currentColor" />
+              </svg>
+            </button>
+            <button type="button" class="flex h-6 w-6 items-center justify-center rounded-full border border-transparent bg-white p-0 m-0 cursor-pointer shadow-sm transition-all duration-150 ease-out hover:border-white/50 hover:bg-slate-100 hover:shadow-md hover:shadow-black/20 hover:ring-2 hover:ring-white/60 active:scale-[0.96] active:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#06224C]" aria-label="Settings">
+              <svg class="pointer-events-none h-4 w-4 shrink-0 text-[#06224C]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" shape-rendering="geometricPrecision">
+                <path d="M12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" stroke="currentColor" stroke-width="2" />
+                <path d="M19 12a7.1 7.1 0 0 0-.07-.95l2.02-1.57-2-3.46-2.48.81a7.5 7.5 0 0 0-1.65-.96L14.4 3h-4.8l-.42 2.87c-.59.23-1.14.55-1.65.96l-2.48-.81-2 3.46 2.02 1.57a7.9 7.9 0 0 0 0 1.9L3.05 14.52l2 3.46 2.48-.81c.5.41 1.06.73 1.65.96L9.6 21h4.8l.42-2.87c.59-.23 1.14-.55 1.65-.96l2.48.81 2-3.46-2.02-1.57c.05-.31.07-.63.07-.95Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".9" />
+              </svg>
+            </button>
+            <button type="button" class="flex h-6 w-6 items-center justify-center rounded-full border border-transparent bg-white p-0 m-0 cursor-pointer shadow-sm transition-all duration-150 ease-out hover:border-white/50 hover:bg-slate-100 hover:shadow-md hover:shadow-black/20 hover:ring-2 hover:ring-white/60 active:scale-[0.96] active:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#06224C]" aria-label="Notifications">
+              <svg class="pointer-events-none h-4 w-4 shrink-0 text-[#06224C]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" shape-rendering="geometricPrecision">
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
           </div>
+
+          <div id="planningProfileWrap" class="relative shrink-0">
+            <button type="button" id="planningProfileToggle" class="flex items-center gap-2 rounded-full py-0.5 pl-0.5 pr-1 transition-colors duration-150 ease-out hover:bg-white/15 active:bg-white/25 md:rounded-lg md:px-2 md:py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06224C]" aria-expanded="false" aria-haspopup="true" aria-label="Profile menu, Pentakota Srinivas" onclick="togglePlanningProfileMenu(event)">
+              <img src="./public/photo.webp" alt="" class="h-8 w-8 shrink-0 rounded-full object-cover md:h-7 md:w-7" />
+              <span id="planningDisplayUserName" class="hidden max-w-[140px] truncate text-left text-[11px] text-white md:inline md:max-w-[180px]">Pentakota Srinivas</span>
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="hidden shrink-0 text-white/90 md:block">
+                <path d="M3.5 5L6 7.5L8.5 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" />
+              </svg>
+            </button>
+            <div id="planningProfileMenu" class="absolute right-0 top-full z-50 mt-1 hidden min-w-[160px] rounded-md border border-gray-200 bg-white py-1 shadow-lg" role="menu">
+              <button type="button" class="block w-full px-3 py-2 text-left text-xs text-gray-800 hover:bg-gray-50" onclick="location.hash='login'; showPage('login'); document.getElementById('planningProfileMenu').classList.add('hidden');" role="menuitem">
+                Sign out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="planningMobileMenu" class="hidden border-t border-white/20 px-3 pb-3 pt-2 md:hidden planning-zoom-show-mobile-menu">
+        <div class="grid grid-cols-2 gap-2">
+          <button type="button" onclick="planningNavClick('workspace')" class="rounded-md border border-white/25 px-2 py-2 text-left text-xs text-white" id="planningMobile-workspace">Workspace</button>
+          <button type="button" onclick="planningNavClick('myWebsites')" class="rounded-md border border-white/25 px-2 py-2 text-left text-xs text-white" id="planningMobile-myWebsites">My Websites</button>
+          <button type="button" onclick="planningNavClick('templates')" class="rounded-md border border-white/25 px-2 py-2 text-left text-xs text-white" id="planningMobile-templates">Templates</button>
+          <button type="button" onclick="planningNavClick('domains')" class="rounded-md border border-white/25 px-2 py-2 text-left text-xs text-white" id="planningMobile-domains">Domains</button>
+          <button type="button" onclick="planningNavClick('billing')" class="rounded-md border border-[#f0e6d4] bg-white/10 px-2 py-2 text-left text-xs text-white" id="planningMobile-billing">Billing</button>
         </div>
       </div>
     </nav>
 
-    <div class="mx-auto max-w-6xl rounded-sm border border-[#dbe3ef] bg-white shadow-sm mt-4">
-      <section class="px-3 py-5 sm:px-8 sm:py-8">
-        <div class="mx-auto mb-4 max-w-5xl rounded bg-gradient-to-r from-[#06224C] to-[#1A5BBC] px-4 py-2 text-center text-[11px] font-semibold text-white sm:text-xs">
+    <div class="w-full border border-[#dbe3ef] bg-white shadow-sm">
+      <section id="planningBillingContent" class="scroll-mt-4 px-3 py-5 sm:px-8 sm:py-8">
+        <div class="mb-4 w-full rounded-sm bg-gradient-to-r from-[#06224C] to-[#1A5BBC] px-4 py-2 text-center text-[11px] font-semibold text-white sm:text-xs">
           Upgrade Now: Get - 50% Off on Selected Plans
         </div>
 
-        <div class="rounded bg-[#edf3fb] px-3 py-6 sm:px-8">
+        <div id="planningPlansView" class="rounded bg-[#edf3fb] px-5 py-8 sm:px-8 sm:py-10 md:px-10">
+          <div class="mx-auto w-full max-w-5xl">
           <h1 class="text-center text-3xl font-bold text-[#0b3268] sm:text-[44px] sm:leading-tight">Choose the Best Plan for You</h1>
-          <p class="mt-2 text-center text-[11px] text-[#6d7f9d] sm:text-xs">Create your website for free and upgrade when you're ready.</p>
+          <p class="mx-auto mt-4 max-w-2xl text-center text-[13px] font-medium leading-relaxed text-[#0f172a] sm:text-sm md:text-base">Create your website for free and upgrade when you're ready</p>
 
-          <div class="mt-3 text-center">
+          <div class="mt-5 flex justify-center sm:mt-6">
             <button
               type="button"
-              onclick="location.hash='login'; showPage('login')"
-              class="inline-flex items-center rounded-full bg-gradient-to-r from-[#06224C] to-[#1A5BBC] px-5 py-2 text-[11px] font-semibold text-white hover:opacity-90 sm:text-xs"
+              onclick="planningOpenPayment(0, true)"
+              class="inline-flex items-center gap-2 rounded-full border-0 bg-gradient-to-r from-[#06224C] to-[#1A5BBC] px-5 py-2.5 text-[11px] font-semibold text-white no-underline shadow-md transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#06224C]/45 hover:ring-2 hover:ring-white/55 active:translate-y-0 active:shadow-md sm:text-xs"
             >
-              Start Your Free Plan
+              <span>Start Your Free Plan</span>
+              <span class="flex h-5 w-5 shrink-0 items-center justify-center" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <circle cx="10" cy="10" r="8.25" stroke="white" stroke-width="1.2" fill="none" />
+                  <path d="M8 10h4M11.5 7l3 3-3 3" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                </svg>
+              </span>
             </button>
           </div>
 
-          <p class="mt-4 text-center text-[11px] font-semibold text-[#2d3f5d]">
-            What you get with every plan:
-          </p>
-          <div class="mt-2 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-[10px] text-[#63789b] sm:text-[11px]">
-            <span>Custom Domain</span>
-            <span>Reliable web hosting</span>
-            <span>24/7 customer care</span>
+          <div class="mt-8 w-full pl-3 sm:pl-5 md:pl-8 lg:pl-10">
+            <div class="grid w-full min-w-0 grid-cols-1 gap-y-3 md:grid-cols-4 md:items-center md:gap-x-4 lg:gap-x-6">
+              <p class="min-w-0 text-center text-sm font-bold leading-snug text-[#0c1e36] md:text-left">What you get with every plan:</p>
+              <span class="min-w-0 text-center text-sm font-medium text-[#0f172a] md:text-center">Custom Domain</span>
+              <span class="min-w-0 text-center text-sm font-medium text-[#0f172a] md:text-center">Reliable web hosting</span>
+              <span class="min-w-0 text-center text-sm font-medium text-[#0f172a] md:text-center">24/7 customer care</span>
+            </div>
           </div>
 
-          <div class="mt-4 text-center text-[11px] font-semibold text-[#1f3861]">
-            Bill Monthly <span class="mx-2 text-gray-400">◉</span> Bill Yearly
+          <div class="mt-8 flex w-full justify-center px-3 sm:px-4">
+            <div class="planning-billing-toggle-wrap flex w-full max-w-xl items-center gap-3 sm:gap-5">
+              <span
+                id="planningLabelMonthly"
+                class="planning-billing-label planning-billing-label--active inline-flex min-h-9 min-w-0 flex-1 select-none items-center justify-end py-1.5 pl-2 pr-1 text-right text-sm leading-tight sm:pr-2"
+              >
+                Bill Monthly
+              </span>
+              <button
+                type="button"
+                id="planningBillingSwitch"
+                role="switch"
+                aria-checked="false"
+                aria-label="Toggle monthly or yearly billing"
+                onclick="planningToggleBilling()"
+                class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center self-center rounded-full border border-[#94a3b8] bg-white px-0.5 align-middle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#06224C]/40 focus-visible:ring-offset-2"
+              >
+                <span
+                  id="planningBillingKnob"
+                  class="pointer-events-none absolute left-0.5 top-1/2 h-4 w-4 -translate-y-1/2 translate-x-0 rounded-full bg-[#06224C] shadow-sm transition-transform duration-200"
+                ></span>
+              </button>
+              <span
+                id="planningLabelYearly"
+                class="planning-billing-label inline-flex min-h-9 min-w-0 flex-1 select-none items-center justify-start py-1.5 pl-1 pr-2 text-left text-sm leading-tight sm:pl-2"
+              >
+                Bill Yearly
+              </span>
+            </div>
+          </div>
           </div>
 
-          <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-            <article class="group relative rounded border border-[#d8e1ec] bg-white p-4 text-[#17335c] shadow-sm transition-all duration-200 hover:border-transparent hover:bg-gradient-to-b hover:from-[#06224C] hover:to-[#1A5BBC] hover:text-white hover:shadow-md">
-              <div class="mb-3 flex items-center justify-between gap-2">
+          <div class="planning-plans-grid mx-auto mt-8 grid w-full max-w-5xl grid-cols-1 gap-5 md:grid-cols-3 md:gap-6 md:items-stretch">
+            <article class="group relative flex h-full min-h-0 flex-col rounded border border-[#d8e1ec] bg-white p-4 text-[#0f172a] shadow-sm transition-all duration-200 hover:border-transparent hover:bg-gradient-to-b hover:from-[#06224C] hover:to-[#1A5BBC] hover:text-white hover:shadow-md sm:p-4">
+              <div class="mb-1.5 flex items-center justify-between gap-2">
                 <div>
-                  <h2 class="text-base font-bold">Basic</h2>
-                  <p class="text-xs opacity-80">Per month</p>
+                  <h2 class="text-base font-bold leading-tight transition-colors group-hover:text-white">Basic</h2>
+                  <p id="planningPriceBasicPeriod" class="mt-0.5 text-xs leading-tight text-[#1e3a5c] transition-colors group-hover:text-white">Per month</p>
                 </div>
               </div>
-              <div class="mb-3 flex items-end justify-between">
-                <div class="text-sm opacity-70 line-through">$80</div>
-                <div class="rounded border border-[#bed2f3] bg-[#f4f8ff] px-2 py-1 text-lg font-bold text-[#0f3e87] group-hover:border-white/30 group-hover:bg-white group-hover:text-[#0f3e87]">$40</div>
+              <div class="planning-price-row mb-1.5 flex items-start justify-between gap-2 lg:items-end">
+                <div class="planning-price-oldsave flex min-w-0 flex-wrap items-end gap-x-1.5 gap-y-0.5 pr-1">
+                  <div id="planningPriceBasicOld" class="text-sm font-bold text-[#0f172a] line-through transition-colors group-hover:text-white">$80</div>
+                  <div id="planningPriceBasicSave" class="text-[10px] font-semibold leading-tight text-[#2d4a6e] transition-colors group-hover:text-white">Save 50%</div>
+                </div>
+                <div id="planningPriceBasicNew" class="planning-price-chip relative top-0 mr-1 shrink-0 rounded border border-[#94b4e0] bg-[#e8f0fc] px-2 py-1 text-base font-bold leading-none text-[#082a5c] transition-colors lg:-top-2 lg:mr-3 lg:px-3.5 lg:py-1.5 lg:text-xl group-hover:border-white/30 group-hover:bg-white group-hover:text-[#0f3e87]">$40</div>
               </div>
-              <ul class="space-y-2 text-xs leading-relaxed sm:text-sm">
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Free domain for 1 year</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>20 GB storage space</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Multi-cloud hosting</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Light marketing suite</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>2 site collaborators</span></li>
+              <div class="mb-2 h-px w-full bg-[#dbe3ef] transition-colors group-hover:bg-white/30"></div>
+              <ul class="space-y-1 text-xs leading-snug text-[#0f172a] transition-colors group-hover:text-white sm:text-sm sm:leading-snug">
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Free domain for 1 year</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>20 GB storage space</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Multi-cloud hosting</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Light marketing suite</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>2 site collaborators</span></li>
               </ul>
-              <button type="button" onclick="location.hash='login'; showPage('login')" class="mt-4 block w-full rounded-full bg-gradient-to-r from-[#06224C] to-[#1A5BBC] py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors transition-opacity duration-200 group-hover:bg-none group-hover:bg-white group-hover:text-[#154fa2] group-hover:opacity-100 hover:bg-none hover:bg-white hover:text-[#154fa2]">
+              <div class="mt-2 min-h-0 w-full flex-1 shrink-0" aria-hidden="true"></div>
+              <button type="button" onclick="planningOpenPayment(0)" class="block w-full shrink-0 rounded-full bg-gradient-to-r from-[#06224C] to-[#1A5BBC] py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors transition-opacity duration-200 group-hover:bg-none group-hover:bg-white group-hover:text-[#154fa2] group-hover:opacity-100 hover:bg-none hover:bg-white hover:text-[#154fa2]">
                 Purchase Plan
               </button>
             </article>
 
-            <article class="group relative rounded border border-[#d8e1ec] bg-white p-4 text-[#17335c] shadow-sm transition-all duration-200 hover:border-transparent hover:bg-gradient-to-b hover:from-[#06224C] hover:to-[#1A5BBC] hover:text-white hover:shadow-md">
-              <div class="absolute right-2 top-2 z-10 rounded-[3px] border border-white/10 bg-[#1A5BBC] px-2 py-0.5 text-[8px] font-bold leading-3 text-white shadow-[0_2px_6px_rgba(0,0,0,0.12)] transition-colors group-hover:bg-white group-hover:text-[#06224C] group-hover:border-[#06224C]/40 hover:bg-white hover:text-[#06224C] hover:border-[#06224C]/40">
+            <article class="group planning-recommended-card relative flex h-full min-h-0 flex-col rounded border border-[#d8e1ec] bg-white p-4 text-[#0f172a] shadow-sm transition-all duration-200 hover:border-transparent hover:bg-gradient-to-b hover:from-[#06224C] hover:to-[#1A5BBC] hover:text-white hover:shadow-md sm:p-4">
+              <div class="planning-recommended-badge absolute right-0 top-0 z-10 rounded-bl-md border border-white/10 bg-[#1A5BBC] px-3 py-1.5 text-[9px] font-extrabold leading-none tracking-wide text-white shadow-[0_2px_6px_rgba(0,0,0,0.12)] transition-colors group-hover:bg-white group-hover:text-[#06224C] group-hover:border-[#06224C]/40 hover:bg-white hover:text-[#06224C] hover:border-[#06224C]/40">
                 RECOMMENDED
               </div>
-              <div class="mb-3 flex items-center justify-between gap-2">
+              <div class="mb-1.5 planning-recommended-content-offset flex items-center justify-between gap-2">
                 <div>
-                  <h2 class="text-base font-bold">Business Plan</h2>
-                  <p class="text-xs opacity-80">Per month</p>
+                  <h2 class="text-base font-bold leading-tight transition-colors group-hover:text-white">Business Plan</h2>
+                  <p id="planningPriceBusinessPeriod" class="mt-0.5 text-xs leading-tight text-[#1e3a5c] transition-colors group-hover:text-white">Per month</p>
                 </div>
               </div>
-              <div class="mb-3 flex items-end justify-between">
-                <div class="text-sm opacity-70 line-through">$300</div>
-                <div class="rounded border border-[#bed2f3] bg-[#f4f8ff] px-2 py-1 text-lg font-bold text-[#0f3e87] group-hover:border-white/30 group-hover:bg-white group-hover:text-[#0f3e87]">$150</div>
+              <div class="planning-price-row mb-1.5 flex items-start justify-between gap-2 lg:items-end">
+                <div class="planning-price-oldsave flex min-w-0 flex-wrap items-end gap-x-1.5 gap-y-0.5 pr-1">
+                  <div id="planningPriceBusinessOld" class="text-sm font-bold text-[#0f172a] line-through transition-colors group-hover:text-white">$300</div>
+                  <div id="planningPriceBusinessSave" class="text-[10px] font-semibold leading-tight text-[#2d4a6e] transition-colors group-hover:text-white">Save 50%</div>
+                </div>
+                <div id="planningPriceBusinessNew" class="planning-price-chip relative top-0 mr-1 shrink-0 rounded border border-[#94b4e0] bg-[#e8f0fc] px-2 py-1 text-base font-bold leading-none text-[#082a5c] transition-colors lg:-top-2 lg:mr-3 lg:px-3.5 lg:py-1.5 lg:text-xl group-hover:border-white/30 group-hover:bg-white group-hover:text-[#0f3e87]">$150</div>
               </div>
-              <ul class="space-y-2 text-xs leading-relaxed sm:text-sm">
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Free domain for 1 year</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>100 GB storage space</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Multi-cloud hosting</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Standard marketing suite</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Accept payments</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Basic eCommerce</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Scheduling and services</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>10 site collaborators</span></li>
+              <div class="mb-2 h-px w-full bg-[#dbe3ef] transition-colors group-hover:bg-white/30"></div>
+              <ul class="space-y-1 text-xs leading-snug text-[#0f172a] transition-colors group-hover:text-white sm:text-sm sm:leading-snug">
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Free domain for 1 year</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>100 GB storage space</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Multi-cloud hosting</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Standard marketing suite</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Accept payments</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Basic eCommerce</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Scheduling and services</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>10 site collaborators</span></li>
               </ul>
-              <button type="button" onclick="location.hash='login'; showPage('login')" class="mt-4 block w-full rounded-full bg-gradient-to-r from-[#06224C] to-[#1A5BBC] py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors transition-opacity duration-200 group-hover:bg-none group-hover:bg-white group-hover:text-[#154fa2] group-hover:opacity-100 hover:bg-none hover:bg-white hover:text-[#154fa2]">
+              <div class="mt-2 min-h-0 w-full flex-1 shrink-0" aria-hidden="true"></div>
+              <button type="button" onclick="planningOpenPayment(1)" class="block w-full shrink-0 rounded-full bg-gradient-to-r from-[#06224C] to-[#1A5BBC] py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors transition-opacity duration-200 group-hover:bg-none group-hover:bg-white group-hover:text-[#154fa2] group-hover:opacity-100 hover:bg-none hover:bg-white hover:text-[#154fa2]">
                 Purchase Plan
               </button>
             </article>
 
-            <article class="group rounded border border-[#d8e1ec] bg-white p-4 text-[#17335c] shadow-sm transition-all duration-200 hover:border-transparent hover:bg-gradient-to-b hover:from-[#06224C] hover:to-[#1A5BBC] hover:text-white hover:shadow-md">
-              <div class="mb-3 flex items-center justify-between gap-2">
+            <article class="group relative flex h-full min-h-0 flex-col rounded border border-[#d8e1ec] bg-white p-4 text-[#0f172a] shadow-sm transition-all duration-200 hover:border-transparent hover:bg-gradient-to-b hover:from-[#06224C] hover:to-[#1A5BBC] hover:text-white hover:shadow-md sm:p-4">
+              <div class="mb-1.5 flex items-center justify-between gap-2">
                 <div>
-                  <h2 class="text-base font-bold">Advanced</h2>
-                  <p class="text-xs opacity-80">Per month</p>
+                  <h2 class="text-base font-bold leading-tight transition-colors group-hover:text-white">Advanced</h2>
+                  <p id="planningPriceAdvancedPeriod" class="mt-0.5 text-xs leading-tight text-[#1e3a5c] transition-colors group-hover:text-white">Per month</p>
                 </div>
               </div>
-              <div class="mb-3 flex items-end justify-between">
-                <div class="text-sm opacity-70 line-through">$400</div>
-                <div class="rounded border border-[#bed2f3] bg-[#f4f8ff] px-2 py-1 text-lg font-bold text-[#0f3e87] group-hover:border-white/30 group-hover:bg-white group-hover:text-[#0f3e87]">$180</div>
+              <div class="planning-price-row mb-1.5 flex items-start justify-between gap-2 lg:items-end">
+                <div class="planning-price-oldsave flex min-w-0 flex-wrap items-end gap-x-1.5 gap-y-0.5 pr-1">
+                  <div id="planningPriceAdvancedOld" class="text-sm font-bold text-[#0f172a] line-through transition-colors group-hover:text-white">$400</div>
+                  <div id="planningPriceAdvancedSave" class="text-[10px] font-semibold leading-tight text-[#2d4a6e] transition-colors group-hover:text-white">Save 30%</div>
+                </div>
+                <div id="planningPriceAdvancedNew" class="planning-price-chip relative top-0 mr-1 shrink-0 rounded border border-[#94b4e0] bg-[#e8f0fc] px-2 py-1 text-base font-bold leading-none text-[#082a5c] transition-colors lg:-top-2 lg:mr-3 lg:px-3.5 lg:py-1.5 lg:text-xl group-hover:border-white/30 group-hover:bg-white group-hover:text-[#0f3e87]">$280</div>
               </div>
-              <ul class="space-y-2 text-xs leading-relaxed sm:text-sm">
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Free domain for 1 year</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>300 GB storage space</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Multi-cloud hosting</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Legacy marketing suite</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Accept payments</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Basic eCommerce</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>Scheduling and services</span></li>
-                <li class="flex items-start gap-2"><span class="mt-0.5 text-[10px]">✓</span><span>5 site collaborators</span></li>
+              <div class="mb-2 h-px w-full bg-[#dbe3ef] transition-colors group-hover:bg-white/30"></div>
+              <ul class="space-y-1 text-xs leading-snug text-[#0f172a] transition-colors group-hover:text-white sm:text-sm sm:leading-snug">
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Free domain for 1 year</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>300 GB storage space</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Multi-cloud hosting</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Legacy marketing suite</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Accept payments</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Basic eCommerce</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>Scheduling and services</span></li>
+                <li class="flex items-start gap-1.5"><span class="mt-px text-[10px] text-[#0b3268] transition-colors group-hover:text-white" aria-hidden="true">✓</span><span>5 site collaborators</span></li>
               </ul>
-              <button type="button" onclick="location.hash='login'; showPage('login')" class="mt-4 block w-full rounded-full bg-gradient-to-r from-[#06224C] to-[#1A5BBC] py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors transition-opacity duration-200 group-hover:bg-none group-hover:bg-white group-hover:text-[#154fa2] group-hover:opacity-100 hover:bg-none hover:bg-white hover:text-[#154fa2]">
+              <div class="mt-2 min-h-0 w-full flex-1 shrink-0" aria-hidden="true"></div>
+              <button type="button" onclick="planningOpenPayment(2)" class="block w-full shrink-0 rounded-full bg-gradient-to-r from-[#06224C] to-[#1A5BBC] py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors transition-opacity duration-200 group-hover:bg-none group-hover:bg-white group-hover:text-[#154fa2] group-hover:opacity-100 hover:bg-none hover:bg-white hover:text-[#154fa2]">
                 Purchase Plan
               </button>
             </article>
+          </div>
+        </div>
+
+        <div id="planningPaymentView" class="hidden mx-auto w-full text-white" style="max-width:740px;border-radius:8px;overflow:hidden;background:linear-gradient(180deg,#2b66be 0%,#0a2a5f 100%);box-shadow:0 2px 0 rgba(0,0,0,0.2);">
+          <div class="border-b border-white/20 px-4 pb-6 pt-4 sm:px-6 sm:pb-8 sm:pt-6">
+            <div class="mb-4 text-left">
+              <button type="button" onclick="planningBackToPlans()" class="inline-flex items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 sm:text-sm" aria-label="Back to plans">← Back to plans</button>
+            </div>
+            <div class="text-center">
+              <h2 class="text-2xl font-bold sm:text-3xl">Secure Payment</h2>
+              <p id="planningPaymentSubtitle" class="mt-2 text-xs text-white/85 sm:text-sm">Enter your card details to upgrade.</p>
+            </div>
+          </div>
+          <div class="mx-auto w-full px-4 py-6 sm:px-6 sm:py-8" style="max-width:430px;">
+            <div class="space-y-3 text-xs sm:space-y-4 sm:text-sm">
+              <label class="flex cursor-pointer items-center gap-2">
+                <input type="radio" name="planningPm" value="paypal" class="accent-white" onchange="planningSyncPaymentMethodUI()" />
+                Paypal
+              </label>
+              <label class="flex cursor-pointer items-center gap-2">
+                <input type="radio" name="planningPm" value="card" class="accent-white" checked onchange="planningSyncPaymentMethodUI()" />
+                Credit / Debit Card
+              </label>
+              <label class="flex cursor-pointer items-center gap-2">
+                <input type="radio" name="planningPm" value="netbanking" class="accent-white" onchange="planningSyncPaymentMethodUI()" />
+                Net Banking
+              </label>
+              <label class="flex cursor-pointer items-center gap-2">
+                <input type="radio" name="planningPm" value="online" class="accent-white" onchange="planningSyncPaymentMethodUI()" />
+                Online Payment ( g-pay / Phone pay )
+              </label>
+            </div>
+            <div class="mt-5 border-t border-white/15 pt-5 text-xs sm:text-sm">
+              <div id="planningPaymentPanelPaypal" class="hidden space-y-3">
+                <p class="text-white/80">You will be redirected to PayPal to log in and approve this payment.</p>
+                <input id="planningPaypalEmail" type="email" inputmode="email" autocomplete="email" placeholder="PayPal email" class="block w-full rounded border border-white/40 bg-transparent px-3 py-2 text-xs text-white placeholder:text-white/70 focus:outline-none sm:text-sm" style="width:100%;" />
+              </div>
+              <div id="planningPaymentPanelCard">
+                <input id="planningCardNumber" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="cc-number" placeholder="Card Number" class="mb-4 block w-full rounded border border-white/40 bg-transparent px-3 py-2 text-xs text-white placeholder:text-white/70 focus:outline-none sm:text-sm" style="width:100%;" oninput="planningCardNumberInput(this)" />
+                <div class="grid grid-cols-2 gap-2" style="width:100%;">
+                  <input id="planningCardExpiry" type="text" inputmode="numeric" pattern="[0-9/]*" autocomplete="cc-exp" placeholder="MM/YY" class="rounded border border-white/40 bg-transparent px-3 py-2 text-xs text-white placeholder:text-white/70 focus:outline-none sm:text-sm" oninput="planningCardExpiryInput(this)" />
+                  <input id="planningCardCvv" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="cc-csc" placeholder="Cvv" class="rounded border border-white/40 bg-transparent px-3 py-2 text-xs text-white placeholder:text-white/70 focus:outline-none sm:text-sm" oninput="planningCardCvvInput(this)" />
+                </div>
+              </div>
+              <div id="planningPaymentPanelNetbanking" class="hidden space-y-3">
+                <label class="block text-white/90">Select your bank</label>
+                <select id="planningNetBank" class="w-full rounded border border-white/40 bg-[#0a2a5f]/80 px-3 py-2 text-xs text-white focus:outline-none sm:text-sm">
+                  <option value="">Choose bank…</option>
+                  <option value="hdfc">HDFC Bank</option>
+                  <option value="icici">ICICI Bank</option>
+                  <option value="sbi">State Bank of India</option>
+                  <option value="axis">Axis Bank</option>
+                  <option value="kotak">Kotak Mahindra Bank</option>
+                  <option value="other">Other bank</option>
+                </select>
+                <p class="text-[11px] leading-snug text-white/75">You will be taken to your bank&apos;s website to authorize payment, then returned here.</p>
+              </div>
+              <div id="planningPaymentPanelOnline" class="hidden space-y-4">
+                <div class="flex flex-wrap gap-3">
+                  <label class="flex cursor-pointer items-center gap-2">
+                    <input type="radio" name="planningOnlineWallet" value="gpay" class="accent-white" checked onchange="planningSyncOnlinePaymentHint()" />
+                    Google Pay
+                  </label>
+                  <label class="flex cursor-pointer items-center gap-2">
+                    <input type="radio" name="planningOnlineWallet" value="phonepe" class="accent-white" onchange="planningSyncOnlinePaymentHint()" />
+                    PhonePe
+                  </label>
+                </div>
+                <div>
+                  <label class="mb-1.5 block text-white/90">UPI ID</label>
+                  <input id="planningUpiId" type="text" autocomplete="off" placeholder="name@bank / name@upi" class="block w-full rounded border border-white/40 bg-transparent px-3 py-2 text-xs text-white placeholder:text-white/70 focus:outline-none sm:text-sm" style="width:100%;" />
+                  <p id="planningOnlinePaymentHint" class="mt-2 text-[11px] leading-snug text-white/75">Open Google Pay and approve the request, or pay with your UPI ID above.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-white/20 px-4 py-5 text-center sm:px-6 sm:py-6">
+            <button id="planningCompletePaymentBtn" type="button" onclick="planningCompletePayment()" class="inline-flex min-w-[160px] items-center justify-center rounded bg-white px-5 py-2 text-xs font-semibold text-[#1f2937] sm:min-w-[180px] sm:px-6 sm:text-sm">
+              Complete Payment
+            </button>
+          </div>
+        </div>
+
+        <div id="planningInvoiceView" class="hidden mx-auto w-full text-white" style="max-width:740px;border-radius:8px;overflow:hidden;background:linear-gradient(180deg,#2a66be 0%,#0b2a5c 100%);box-shadow:0 2px 0 rgba(0,0,0,0.25);">
+          <div class="border-b border-white/15 px-4 py-5 sm:px-8 sm:py-6">
+            <div class="mb-4 text-left">
+              <button type="button" onclick="planningBackToPlans()" class="inline-flex items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 sm:text-sm" aria-label="Back to plans">← Back to plans</button>
+            </div>
+            <div class="text-center">
+              <h2 class="text-[36px] font-bold leading-tight">Invoice Details</h2>
+            </div>
+          </div>
+          <div class="space-y-8 px-8 py-7">
+            <div class="mx-auto w-full max-w-2xl space-y-4 text-[15px]">
+              <div class="planning-invoice-row" style="display:grid;grid-template-columns:96px 14px minmax(0,1fr);align-items:center;"><span>Invoice ID</span><span>:</span><span id="planningInvoiceId" class="planning-invoice-value">INV-000000</span></div>
+              <div class="planning-invoice-row" style="display:grid;grid-template-columns:96px 14px minmax(0,1fr);align-items:center;"><span>Date</span><span>:</span><span id="planningInvoiceDate" class="planning-invoice-value">Apr 08, 2026</span></div>
+              <div class="planning-invoice-row" style="display:grid;grid-template-columns:96px 14px minmax(0,1fr);align-items:center;"><span>Plan</span><span>:</span><span id="planningInvoicePlan" class="planning-invoice-value">Basic (Monthly)</span></div>
+              <div class="planning-invoice-row" style="display:grid;grid-template-columns:96px 14px minmax(0,1fr);align-items:center;"><span>Amount</span><span>:</span><span id="planningInvoiceAmount" class="planning-invoice-value">$40</span></div>
+            </div>
+            <div class="border-t border-white/15 pt-6">
+              <h3 class="mx-auto mb-5 w-full max-w-2xl text-[30px] font-semibold">Billing Information</h3>
+              <div class="mx-auto w-full max-w-2xl space-y-4 text-[15px]">
+                <div class="planning-invoice-row" style="display:grid;grid-template-columns:96px 14px minmax(0,1fr);align-items:center;"><span>Name</span><span>:</span><span id="planningInvoiceName" class="planning-invoice-value">Pentakota Srinivas</span></div>
+                <div class="planning-invoice-row" style="display:grid;grid-template-columns:96px 14px minmax(0,1fr);align-items:center;"><span>Email</span><span>:</span><span id="planningInvoiceEmail" class="planning-invoice-value">srinu@gmail.com</span></div>
+                <div class="planning-invoice-row" style="display:grid;grid-template-columns:96px 14px minmax(0,1fr);align-items:center;"><span>Contact No</span><span>:</span><span id="planningInvoiceContact" class="planning-invoice-value">9848xxxx19</span></div>
+                <div class="planning-invoice-row" style="display:grid;grid-template-columns:96px 14px minmax(0,1fr);align-items:center;"><span>Address</span><span>:</span><span id="planningInvoiceAddress" class="planning-invoice-value">Chennai - 636008</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-white/15 px-8 py-6 text-center">
+            <button type="button" onclick="planningSetView('history')" class="inline-flex items-center gap-2 rounded-md bg-white px-6 py-2.5 text-[15px] font-semibold text-[#1f2937]"><span aria-hidden>↓</span>Download Invoice</button>
+          </div>
+        </div>
+
+        <div id="planningHistoryView" class="hidden mx-auto my-6 w-full p-4 text-white" style="max-width:560px;border-radius:8px;background:linear-gradient(180deg,#2f6dca 0%,#0a2a5f 100%);box-shadow:0 2px 0 rgba(0,0,0,0.28);border:2px solid #8aa0c1;">
+          <div class="mx-auto mb-3 w-full max-w-[470px] text-left">
+            <button type="button" onclick="planningBackToPlans()" class="inline-flex items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 sm:text-sm" aria-label="Back to plans">← Back to plans</button>
+          </div>
+          <div class="planning-history-track mx-auto mb-4 flex w-full max-w-[470px] items-center justify-between pb-4" style="border-bottom:1px solid rgba(255,255,255,0.17);">
+            <h2 class="text-[34px] font-bold leading-tight tracking-[0.2px]">Billing History</h2>
+            <div class="flex items-center overflow-hidden rounded-md bg-white" style="color:#1f2937;font-size:10px;line-height:1.2;box-shadow:0 0 0 1px rgba(15,23,42,0.08);">
+              <button id="planningHistoryAllBtn" type="button" onclick="planningSetHistoryFilterYear('all')" style="border-right:1px solid #e2e8f0;padding:7px 10px;color:#1f2937;">All Invoices</button>
+              <select id="planningHistoryYearSelect" onchange="planningSetHistoryFilterYear(this.value)" style="padding:7px 10px;color:#1f2937;border:0;outline:none;background:transparent;font-weight:700;">
+                <option value="this">This Year</option>
+              </select>
+            </div>
+          </div>
+          <div class="planning-history-table-wrap mx-auto w-full max-w-[470px] overflow-x-auto rounded-md bg-white" style="box-shadow:inset 0 0 0 1px rgba(15,23,42,0.08);">
+            <table class="w-full min-w-[470px] text-left" style="font-size:10.5px;color:#0f172a;">
+              <thead class="bg-[#f3f4f6] text-[11px] font-semibold text-[#1f2937]" style="border-bottom:2px solid #d1d5db;">
+                <tr>
+                  <th class="px-3 py-3.5">Date</th>
+                  <th class="px-3 py-3.5">Invoice ID</th>
+                  <th class="px-3 py-3.5">Amount</th>
+                  <th class="px-3 py-3.5">Status</th>
+                  <th class="px-3 py-3.5">Download</th>
+                </tr>
+              </thead>
+              <tbody id="planningHistoryTbody"></tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -1628,7 +2579,7 @@
             <div class="pt-0 pb-1 sm:pt-1 sm:pb-3 lg:pb-2">
             <button
               type="button"
-              onclick="window.location.href='https://accounts.google.com/o/oauth2/v2/auth?client_id=703831654489-m34p97it8cppn924006cgt8u6jgk9tsa.apps.googleusercontent.com&redirect_uri=http://localhost:5000/api/auth/google&response_type=code&scope=openid%20email%20profile&access_type=online&prompt=select_account'"
+              onclick="window.location.href='https://accounts.google.com/o/oauth2/v2/auth?client_id=703831654489-m34p97it8cppn924006cgt8u6jgk9tsa.apps.googleusercontent.com&redirect_uri=http://52.14.128.127:5000/api/auth/google&response_type=code&scope=openid%20email%20profile&access_type=online&prompt=select_account'"
               class="
                 w-full
                 h-[42px]
@@ -1810,16 +2761,16 @@
     </div>
   </div>
 
-  <!-- ================= FORGOT PASSWORD PAGE (matches uploaded design) ================= -->
-  <div id="forgotPage" class="hidden min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-6">
+  <!-- ================= FORGOT PASSWORD PAGE (layout matches app/forgot-password) ================= -->
+  <div id="forgotPage" class="hidden min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-6 relative">
     <div class="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-12 auth-layout">
       <!-- LEFT: Illustration -->
       <div class="auth-image-col w-full lg:w-1/2 flex items-center justify-center order-2 lg:order-1">
         <img src="public/password.webp" alt="Password reset illustration" class="auth-image w-[85%] sm:w-[80%] lg:w-[88%] max-w-[480px] object-contain" />
       </div>
-      <!-- RIGHT: Forgot password form card (design specs: gradient #234E70 → #282738 + shadow) -->
+      <!-- RIGHT: Forgot password form card (layout matches app; gradient kept for index) -->
       <div class="w-full lg:w-1/2 flex items-center justify-center order-1 lg:order-2">
-        <div class="relative overflow-hidden w-full max-w-[420px] rounded-xl px-8 sm:px-10 py-8 sm:py-10" style="background: linear-gradient(180deg, #4A76F3 0%, #2C4FAD 50%, #0A193F 100%); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+        <div class="relative overflow-hidden w-full max-w-[420px] rounded-xl px-8 sm:px-10 py-8 sm:py-10" style="background: linear-gradient(180deg, #4A76F3 0%, #2C4FAD 50%, #0A193F 100%); box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.25);">
           <h1 class="text-[20px] sm:text-[24px] font-bold text-center mb-3" style="color: #FFFFFF;">Forgot Your Password?</h1>
           <p class="text-center text-[13px] sm:text-[14px] mb-5 leading-relaxed" style="color: #FFFFFF;">Enter your email address or mobile number and we will send you instructions to reset your password.</p>
           <div class="flex flex-col items-center space-y-5">
@@ -1852,13 +2803,13 @@
     </div>
   </div>
 
-  <!-- ================= VERIFY EMAIL PAGE ================= -->
-  <div id="verifyEmailPage" class="hidden min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-6">
+  <!-- ================= VERIFY EMAIL PAGE (layout matches app/verify-email) ================= -->
+  <div id="verifyEmailPage" class="hidden min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-6 relative">
     <button type="button" onclick="showPage('forgot')" class="absolute left-4 top-4 text-2xl text-black" aria-label="Go back">
       ←
     </button>
     <div class="w-full max-w-[480px]">
-      <div class="relative overflow-hidden w-full max-w-[420px] rounded-xl px-8 sm:px-10 py-8 sm:py-10" style="background: linear-gradient(180deg, #4A76F3 0%, #2C4FAD 50%, #0A193F 100%); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+      <div class="relative overflow-hidden w-full rounded-xl px-8 sm:px-10 py-8 sm:py-10 text-center" style="background: linear-gradient(180deg, #4A76F3 0%, #2C4FAD 50%, #0A193F 100%); box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.25);">
         <div class="flex justify-center mb-4 sm:mb-6">
           <img src="public/email.webp" alt="Email verification" class="w-[96px] h-[96px] object-contain" />
         </div>
@@ -1868,7 +2819,7 @@
           Registered email <span id="verifyEmailContact">email@example.com</span>
         </p>
 
-        <form onsubmit="confirmEmailOtp(); return false;" class="space-y-6">
+        <form onsubmit="confirmEmailOtp(event); return false;" class="space-y-6">
           <div class="flex justify-center gap-3 sm:gap-4">
             <input id="emailOtp0" type="text" maxlength="1" inputmode="numeric" oninput="handleOtpInput('email',0,event)" class="w-10 h-10 sm:w-12 sm:h-12 rounded border bg-transparent text-center text-lg text-white outline-none focus:border-white/80" style="border: 1px solid rgba(255,255,255,0.7);" />
             <input id="emailOtp1" type="text" maxlength="1" inputmode="numeric" oninput="handleOtpInput('email',1,event)" class="w-10 h-10 sm:w-12 sm:h-12 rounded border bg-transparent text-center text-lg text-white outline-none focus:border-white/80" style="border: 1px solid rgba(255,255,255,0.7);" />
@@ -1898,13 +2849,13 @@
     </div>
   </div>
 
-  <!-- ================= VERIFY MOBILE PAGE ================= -->
-  <div id="verifyMobilePage" class="hidden min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-6">
+  <!-- ================= VERIFY MOBILE PAGE (layout matches app/verify-mobile) ================= -->
+  <div id="verifyMobilePage" class="hidden min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-6 relative">
     <button type="button" onclick="showPage('forgot')" class="absolute left-4 top-4 text-2xl text-black" aria-label="Go back">
       ←
     </button>
     <div class="w-full max-w-[480px]">
-      <div class="relative overflow-hidden w-full max-w-[420px] rounded-xl px-8 sm:px-10 py-8 sm:py-10" style="background: linear-gradient(180deg, #4A76F3 0%, #2C4FAD 50%, #0A193F 100%); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+      <div class="relative overflow-hidden w-full rounded-xl px-8 sm:px-10 py-8 sm:py-10 text-center" style="background: linear-gradient(180deg, #4A76F3 0%, #2C4FAD 50%, #0A193F 100%); box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.25);">
         <div class="flex justify-center mb-4 sm:mb-6">
           <img src="public/mobile.webp" alt="Mobile verification" class="w-[96px] h-[96px] object-contain" />
         </div>
@@ -1914,7 +2865,7 @@
           Registered mobile number <span id="verifyMobileContact">+91-XXXXXXXXXX</span>
         </p>
 
-        <form onsubmit="confirmMobileOtp(); return false;" class="space-y-6">
+        <form onsubmit="confirmMobileOtp(event); return false;" class="space-y-6">
           <div class="flex justify-center gap-3 sm:gap-4">
             <input id="mobileOtp0" type="text" maxlength="1" inputmode="numeric" oninput="handleOtpInput('mobile',0,event)" class="w-10 h-10 sm:w-12 sm:h-12 rounded border bg-transparent text-center text-lg text-white outline-none focus:border-white/80" style="border: 1px solid rgba(255,255,255,0.7);" />
             <input id="mobileOtp1" type="text" maxlength="1" inputmode="numeric" oninput="handleOtpInput('mobile',1,event)" class="w-10 h-10 sm:w-12 sm:h-12 rounded border bg-transparent text-center text-lg text-white outline-none focus:border-white/80" style="border: 1px solid rgba(255,255,255,0.7);" />
@@ -1944,13 +2895,13 @@
     </div>
   </div>
 
-  <!-- ================= VERIFIED PAGE (tick.webp design) ================= -->
-  <div id="verifiedPage" class="hidden min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-6">
+  <!-- ================= VERIFIED PAGE (layout matches app/verified) ================= -->
+  <div id="verifiedPage" class="hidden min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-6 relative">
     <button type="button" onclick="location.hash='forgot'; showPage('forgot');" class="absolute left-4 top-4 text-2xl text-black" aria-label="Go back">
       ←
     </button>
     <div class="w-full max-w-[480px]">
-      <div class="relative overflow-hidden w-full max-w-[420px] rounded-xl px-8 sm:px-10 py-8 sm:py-10" style="background: linear-gradient(180deg, #4A76F3 0%, #2C4FAD 50%, #0A193F 100%); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+      <div class="relative overflow-hidden w-full rounded-xl px-8 sm:px-10 py-8 sm:py-10 text-center" style="background: linear-gradient(180deg, #4A76F3 0%, #2C4FAD 50%, #0A193F 100%); box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.25);">
         <div class="flex justify-center mb-4 sm:mb-6">
           <img src="public/tick.webp" alt="Verified" class="w-[96px] h-[96px] object-contain" />
         </div>
@@ -1963,17 +2914,17 @@
     </div>
   </div>
 
-  <!-- ================= CREATE NEW PASSWORD PAGE (new.webp design) ================= -->
-  <div id="createNewPasswordPage" class="hidden min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-6">
+  <!-- ================= CREATE NEW PASSWORD PAGE (layout matches app/create-new-password) ================= -->
+  <div id="createNewPasswordPage" class="hidden min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 py-6 relative">
     <button type="button" onclick="location.hash='verified'; showPage('verified');" class="absolute left-4 top-4 text-2xl text-black z-10" aria-label="Go back">
       ←
     </button>
-    <div class="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-12">
-      <div class="w-full lg:w-1/2 flex items-center justify-center order-2 lg:order-1">
-        <img src="public/new.webp" alt="Create new password" class="w-[85%] sm:w-[80%] lg:w-[88%] max-w-[480px] object-contain" />
+    <div class="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-12 auth-layout">
+      <div class="auth-image-col w-full lg:w-1/2 flex items-center justify-center order-2 lg:order-1">
+        <img src="public/new.webp" alt="Create new password" class="auth-image w-[85%] sm:w-[80%] lg:w-[88%] max-w-[480px] object-contain" />
       </div>
       <div class="w-full lg:w-1/2 flex items-center justify-center order-1 lg:order-2">
-        <div class="relative overflow-hidden w-full max-w-[420px] rounded-xl px-8 sm:px-10 py-8 sm:py-10" style="background: linear-gradient(180deg, #4A76F3 0%, #2C4FAD 50%, #0A193F 100%); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+        <div class="relative overflow-hidden w-full max-w-[420px] rounded-xl px-8 sm:px-10 py-8 sm:py-10" style="background: linear-gradient(180deg, #4A76F3 0%, #2C4FAD 50%, #0A193F 100%); box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.25);">
           <h1 class="text-[20px] sm:text-[24px] font-bold text-center mb-6" style="color: #FFFFFF;">Create New Password</h1>
           <form onsubmit="handleUpdatePassword(); return false;" class="space-y-5">
             <div>
@@ -2014,21 +2965,22 @@
     <p class="mt-2 text-sm text-gray-500">
       Please try again later.
     </p>
-    <div class="mt-4 rounded-md bg-gray-100 px-4 py-3 text-left text-sm text-gray-700">
-      <p class="font-semibold">Quick test links:</p>
-      <p>
-        Email:
-        <a href="http://localhost:3000/verify-email?contact=test@example.com" class="text-blue-700 underline break-all">
-          http://localhost:3000/verify-email?contact=test@example.com
-        </a>
-      </p>
-      <p>
-        Forgot:
-        <a href="#forgot" onclick="location.hash='forgot'; showPage('forgot'); return false;" class="text-blue-700 underline">
-          index.html#forgot
-        </a>
-      </p>
-    </div>
+    <button
+      onclick="if (window.history.length > 1) { history.back(); } else { location.hash='planning'; showPage('planning'); }"
+      class="mt-6 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+    >
+      Go Back
+    </button>
+  </div>
+
+  <div id="notFoundPage" class="hidden min-h-screen flex flex-col items-center justify-center bg-white px-4">
+    <h1 class="text-6xl font-bold text-red-600">404</h1>
+    <p class="mt-4 text-lg text-gray-700">
+      Page Not Found
+    </p>
+    <p class="mt-2 text-sm text-gray-500">
+      The page you are looking for does not exist.
+    </p>
     <button
       onclick="if (window.history.length > 1) { history.back(); } else { location.hash='planning'; showPage('planning'); }"
       class="mt-6 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
